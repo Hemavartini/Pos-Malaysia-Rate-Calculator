@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "b743489f-a844-4c5b-b47d-858aa8926ddd",
+		"name": "Pos Malaysia - Rate Calculator",
+		"description": "This collection will cover the below requests.\n\n1. Find the API that lists all the countries available in the “To” dropdown and create  \n    the request (1 request).\n    \n2. Enter the postcode in the From and To. The states will be automatically  \n    populated. Find the API that’s responding to the postcode number being entered  \n    by the user and create the request (1 request).\n    \n3. Enter the complete From, To, and Weight, and click Calculate. You will get a  \n    quote. Retrieve the API that calculates the rate and build the equivalent  \n    Postman request.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19431074",
+		"_collection_link": "https://demo-team-0099.postman.co/workspace/Tech-Evaluation-Demo~773c86d8-12b1-49e7-875f-56a391e9b1f9/collection/19431074-b743489f-a844-4c5b-b47d-858aa8926ddd?action=share&source=collection_link&creator=19431074"
+	},
+	"item": [
+		{
+			"name": "1. Countries List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/countries",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. States API (To Field)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"postCode\": \"70300\"\r\n}    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/getStateByPostcode",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"getStateByPostcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.1 States API (From Field)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"postCode\": \"54000\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/getStateByPostcode",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"getStateByPostcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Rate Quote Calculator",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\" : \"Malaysia\",\r\n    \"postcodeFrom\" : \"54000\",\r\n    \"postcodeTo\" : \"70300\",\r\n    \"weight\" : \"8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/price",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"price"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://www-api.pos.com.my",
+			"type": "default"
+		}
+	]
+}
